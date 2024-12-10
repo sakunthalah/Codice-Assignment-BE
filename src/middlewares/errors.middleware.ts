@@ -15,9 +15,6 @@ const errorHandlerMiddleware = (
       message: err.message
     });
   } else {
-    // Handle unknown or programming errors
-    console.error("Unexpected error:", err);
-
     res.status(500).json({
       success: false,
       message: "Internal Server Error"

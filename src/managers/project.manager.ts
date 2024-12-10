@@ -5,6 +5,7 @@ import { ProjectPaginatedRequest, ProjectPaginatedResponse } from '../types/inte
 import { AppError } from '../helpers/app-error.helper';
 
 class ProjectManager {
+
     async getProjects(): Promise<ResponseData<ProjectDto[]>> {
         const projectResponse: ResponseData<ProjectDto[]> = await projectService.getProjects();
         if (!projectResponse.success) {
