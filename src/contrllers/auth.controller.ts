@@ -1,11 +1,11 @@
 import { NextFunction, Request, Response } from "express";
 import { handleSuccess } from "../helpers/response.helper";
 import { UserLoginDto } from "../types/interfaces/requests/login/user-login";
-import { loginManager } from "../managers/login.manager";
+import { authManager } from "../managers/auth.manager";
 import { AppError } from "../helpers/app-error.helper";
 
 
-class LoginController {
+class AuthController {
 
   public signIn = async (req: any, res: Response, next: NextFunction): Promise<void> => {
     try {
@@ -13,7 +13,7 @@ class LoginController {
         throw new AppError("Bad request", 404);
       }
       const requestPayload: UserLoginDto = req.body;
-      const loginResponse = await loginManager.signIn(requestPayload);
+      const loginResponse = await authManager.signIn(requestPayload);
       if (loginResponse.success) {
         handleSuccess(res, loginResponse.message, loginResponse);
       }
@@ -29,7 +29,7 @@ class LoginController {
 
   public getUsers = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      const userListResponse = await loginManager.getUsers();
+      const userListResponse = await authManager.getUsers();
       handleSuccess(res, userListResponse.message, userListResponse.data);
     }
     catch (error: any) {
@@ -38,4 +38,4 @@ class LoginController {
   }
 }
 
-export const loginController = new LoginController();
+export const authController = new AuthController();
