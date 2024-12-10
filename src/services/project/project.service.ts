@@ -25,7 +25,6 @@ class ProjectService {
 
     async getPaginatedProjects(request: ProjectPaginatedRequest): Promise<ResponseData<ProjectPaginatedResponse<ProjectDto>>> {
         const projectList: ProjectDto[] = getProjects();
-
         let filteredData = projectList;
 
         if (request.data.projectName) {
@@ -52,7 +51,6 @@ class ProjectService {
         const totalPages = Math.ceil(totalRecords / pageSize);
         const startIndex = (page - 1) * pageSize;
         const endIndex = startIndex + pageSize;
-
         // Get paginated data
         const paginatedData = filteredData.slice(startIndex, endIndex);
 
@@ -68,9 +66,7 @@ class ProjectService {
             success: true,
             message: "Projects retrieved successfully",
             data: projectPaginatedResponse
-
         };
-
         return response;
     }
 }

@@ -1,15 +1,15 @@
 import users from "../../../mockdata/users.json";
-import { UserLoginDto } from "../../types/interfaces/requests/login/user-login";
+import { SignInDto } from "../../types/interfaces/requests/signin/sign-in";
 import { UserDto } from "../../types/interfaces/requests/user/user";
 import { ResponseData } from "../../types/interfaces/api-response.interface";
 import jwt, { Secret, JwtPayload } from 'jsonwebtoken';
 import { SecretKey } from '../../types/constants/constants';
+
 export const getUsers = () => {
     return users; // Returning data from the JSON file
 };
 
 class AuthService {
-
     async getUsers(): Promise<ResponseData<UserDto[]>> {
         const users = getUsers();
         const userArray: UserDto[] = users;
@@ -21,8 +21,7 @@ class AuthService {
         };
     }
 
-    async signIn(request: UserLoginDto): Promise<ResponseData<string>> {
-
+    async signIn(request: SignInDto): Promise<ResponseData<string>> {
         const email = request.email;
         const password = request.password;
         const users = getUsers();
@@ -40,9 +39,7 @@ class AuthService {
                     data: token,
                     message: "Login successful"
                 };
-
             }
-
             return {
                 success: false,
                 data: "",
@@ -56,4 +53,5 @@ class AuthService {
         };
     }
 }
+
 export const authService = new AuthService();

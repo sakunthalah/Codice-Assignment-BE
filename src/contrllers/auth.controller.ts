@@ -1,9 +1,8 @@
 import { NextFunction, Request, Response } from "express";
 import { handleSuccess } from "../helpers/response.helper";
-import { UserLoginDto } from "../types/interfaces/requests/login/user-login";
+import { SignInDto } from "../types/interfaces/requests/signin/sign-in";
 import { authManager } from "../managers/auth.manager";
 import { AppError } from "../helpers/app-error.helper";
-
 
 class AuthController {
 
@@ -12,7 +11,7 @@ class AuthController {
       if (Object.keys(req.body).length === 0) {
         throw new AppError("Bad request", 404);
       }
-      const requestPayload: UserLoginDto = req.body;
+      const requestPayload: SignInDto = req.body;
       const loginResponse = await authManager.signIn(requestPayload);
       if (loginResponse.success) {
         handleSuccess(res, loginResponse.message, loginResponse);
@@ -20,7 +19,6 @@ class AuthController {
       else {
         throw new AppError(loginResponse.message, 400);
       }
-
     }
     catch (error: any) {
       next(error);
