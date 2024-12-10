@@ -21,7 +21,7 @@ class LoginService {
         };
     }
 
-    async login(request: UserLoginDto): Promise<ResponseData<string>> {
+    async signIn(request: UserLoginDto): Promise<ResponseData<string>> {
 
         const email = request.email;
         const password = request.password;
@@ -55,7 +55,5 @@ class LoginService {
             message: "Bad request!"
         };
     }
-
-
 }
 export const loginService = new LoginService();

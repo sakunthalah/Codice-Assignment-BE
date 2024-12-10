@@ -17,9 +17,9 @@ class ProjectManager {
         const projectResponse: ResponseData<ProjectPaginatedResponse<ProjectDto>> =
             await projectService.getPaginatedProjects(request);
 
-            if (!projectResponse.success) {
-                throw new AppError(projectResponse.message, 400);
-            }
+        if (!projectResponse.success) {
+            throw new AppError(projectResponse.message, 400);
+        }
         return projectResponse;
     }
 }

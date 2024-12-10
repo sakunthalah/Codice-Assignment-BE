@@ -7,8 +7,8 @@ import { AppError } from "../helpers/app-error.helper";
 
 class LoginManager {
 
-  async login(request: UserLoginDto): Promise<ResponseData<string>> {
-    const userResponse: ResponseData<string> = await loginService.login(request);
+  async signIn(request: UserLoginDto): Promise<ResponseData<string>> {
+    const userResponse: ResponseData<string> = await loginService.signIn(request);
     if (!userResponse.success) {
       throw new AppError(userResponse.message, 400);
     }

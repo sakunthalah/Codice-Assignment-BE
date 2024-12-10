@@ -11,7 +11,7 @@ router.get("/", (req: Request, res: Response) => {
     res.status(200).json(msg);
 });
 
-router.use("/auth",authRouter);
+router.use("/auth", authRouter);
 router.use("/project", projectRouter);
 
 export { router as baseRouter }

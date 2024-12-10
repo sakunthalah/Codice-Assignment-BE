@@ -8,11 +8,12 @@ export const getProjects = () => {
     return projects; // Returning data from the JSON file
 };
 
+export const getProjectsById = (projId: number) => {
+    return projects.filter(p => p.id == projId); // Returning data from the JSON file
+};
 class ProjectService {
 
     async getProjects(): Promise<ResponseData<ProjectDto[]>> {
-        //const projects = getProjects();
-
         const projectList: ProjectDto[] = getProjects();
 
         return {
@@ -23,7 +24,6 @@ class ProjectService {
     }
 
     async getPaginatedProjects(request: ProjectPaginatedRequest): Promise<ResponseData<ProjectPaginatedResponse<ProjectDto>>> {
-        //const projects = getProjects();
         const projectList: ProjectDto[] = getProjects();
 
         let filteredData = projectList;
@@ -38,7 +38,6 @@ class ProjectService {
             filteredData = filteredData.filter(prod => prod.status = request.data.status)
         }
         if (request.data.startDate) {
-            console.log(request.data.startDate, new Date(request.data.startDate));
             filteredData = filteredData.filter(prod => new Date(prod.startDate) >= subDays(new Date(request.data.startDate), 1)
                 && new Date(prod.startDate) <= addDays(request.data.startDate, 1))
         }

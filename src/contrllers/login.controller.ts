@@ -7,13 +7,13 @@ import { AppError } from "../helpers/app-error.helper";
 
 class LoginController {
 
-  public login = async (req: any, res: Response, next: NextFunction): Promise<void> => {
+  public signIn = async (req: any, res: Response, next: NextFunction): Promise<void> => {
     try {
       if (Object.keys(req.body).length === 0) {
         throw new AppError("Bad request", 404);
       }
       const requestPayload: UserLoginDto = req.body;
-      const loginResponse = await loginManager.login(requestPayload);
+      const loginResponse = await loginManager.signIn(requestPayload);
       if (loginResponse.success) {
         handleSuccess(res, loginResponse.message, loginResponse);
       }
